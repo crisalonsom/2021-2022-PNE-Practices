@@ -1,5 +1,4 @@
-from seq-01 import *
-
+from Seq1 import *
 s1 = Seq("ACCTGC")
 s2 = Seq("Hello? Am I a valid sequence?")
 print(f"Sequence 1: {s1}")
