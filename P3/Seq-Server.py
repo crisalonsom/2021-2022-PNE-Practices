@@ -15,7 +15,7 @@ try:
 
     print("Seq Server configured")
 
-    while True :
+    while True:
         print(f"Waiting for client ...")
         (client_socket, client_address) = server_socket.accept()
 
@@ -32,7 +32,7 @@ try:
             gene_num = int(slices[1])
             gene = GENES[gene_num]
             seq = Seq()
-            filename = os.path.join("..","Genes", f"{gene}.txt")
+            filename = os.path.join("..", "Genes", f"{gene}.txt")
             seq.read_fasta(filename)
             response = f"{seq} \n"
 

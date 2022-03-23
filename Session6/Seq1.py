@@ -6,7 +6,7 @@ class Seq:
         valid = len(bases) != 0
         i = 0
         while valid and i < len(bases):
-            if bases[i]  in Seq.ALLOWED_BASES:
+            if bases[i] in Seq.ALLOWED_BASES:
                 i += 1
             else:
                 valid = False
