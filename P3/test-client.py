@@ -25,6 +25,8 @@ print()
 c.debug_talk((f"REV {BASES}"))
 print()
 
+
 for gene in GENES:
     c.debug_talk(f"GENE {gene}")
     print()
+
