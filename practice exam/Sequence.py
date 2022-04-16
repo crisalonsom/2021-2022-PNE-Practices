@@ -87,12 +87,12 @@ class Seq:
 
 
     def sum_bases(self):
-        if self.bases == "NULL" or self.bases == "ERROR":
-            print("We could not multiply the bases since the sequence is not correct.")
         result = 0
         for base in self.bases:
             result += Seq.VALUES[base]
         return result
+
+
 
 
 

@@ -66,6 +66,7 @@ try:
             response = f"{sequence.sum_bases()}\n"
 
 
+
         print(response)
         response_bytes = str.encode(response)
         client_socket.send(response_bytes)
