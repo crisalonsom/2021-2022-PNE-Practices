@@ -2,28 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>SEQ2 Server</title>
+    <title>SEQ2 SERVER</title>
   </head>
   <body>
-    <h1>SEQ2 Server</h1>
-    <p>Access to the server</p>
-    <hr>
+    <h1>SEQ2 SERVER</h1>
     <form action="ping" method="get">
-      Is the server alive?
+      <p>Access to the server:<p/>
+      <hr>
+      <p>Is the server alive?</p>
       <input type="submit" value="PING">
-    </form>
-    <hr>
-    <form action="get" method="get">
-        Get a sequence.Select sequence number
-        <select name=" sequence_number">
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-        </select>
+          </form>
 
-        <input type="submit" value="GET">
-    </form>
+      <hr>
+      <form action="get" method="get">
+        <p>Get a sequence. Select a sequence number</p>
+      <select name="sequence_number">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      <input type="submit" value="GET">
+      </form>
+
   </body>
 </html>
