@@ -17,7 +17,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         in the HTTP protocol request"""
 
         termcolor.cprint(self.requestline, 'green')
-        if self.path == "/" or self.path == "/index.html":
+        if self.path == "/" or self.path == "/indexfinalproject.html":
             contents = Path("index.html").read_text()
             self.send_response(200)
         else:

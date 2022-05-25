@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>List of species</title>
 </head>
-<body>
+<body style="background-color: lightcoral">
+
+    <h1>LIST OF {{context.total}} ENSEMBL SPECIES 𓆉</h1>
+
+        {% for s in context.species %}
+        <p3> {{s}} </p3>
+        {% endfor %}
+
+    <a href="/">Return to the main page</a>
 
 </body>
 </html>

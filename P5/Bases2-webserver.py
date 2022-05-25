@@ -14,7 +14,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_get(self):
         termcolor.cprint(self.requestline, 'green')
-        if self.path == "/" or self.path == "/index.html":
+        if self.path == "/" or self.path == "/indexfinalproject.html":
             contents = Path("index.html").read_text()
             self.send_response(200)
         else:
