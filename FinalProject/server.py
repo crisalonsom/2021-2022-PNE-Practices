@@ -55,7 +55,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         path = url.path
         argum = parse_qs(url.query)
         # Message to send back to the client
-
+        contents = ""
 
         if path == "/":
             contents = Path("indexfinalproject.html").read_text()
@@ -65,6 +65,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 sp_dict = request_creation("/info/species", "")
                 spec = sp_dict["species"]
                 number_species = len(spec)
+                limit = int(argum['limit'][0])
 
                 if len(argum) == 1:
                     limit = int(argum['limit'][0])
@@ -78,16 +79,20 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 list_sp = []
                 for s in range(0, int(argum['limit'][0])):
                     list_sp.append(spec[s]["name"])
-                species2 = ""
-                for l in list_sp:
-                    species2 += f"·{l.capitalize()}<br>"
+                species = ""
 
-                contents = read_html_file(path[1:] + ".html").\
-                    render(context={"species": species2,
-                                    "total": number_species})
+                for l in list_sp:
+                    species += f"·{l.capitalize()}<br>"
+                    contents = read_html_file(path[1:] + ".html"). \
+                    render(context={"species": species,
+                                    "total": number_species,
+                                    "limit": limit})
+
+
+
             except Exception:
                 contents = read_html_file("Error.html") \
-            .render(context={})
+                    .render(context={})
 
 
         elif path == "/karyotype":
@@ -96,7 +101,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     species_name = argum['species'][0]
                     dictionary = request_creation("info/assembly/" + species_name, "")
                     kar_dict = dictionary["karyotype"]
-                    contents = read_html_file(path[1:] + ".html").\
+                    contents = read_html_file(path[1:] + ".html"). \
                         render(context={'karyotype': kar_dict})
 
                 else:
@@ -111,13 +116,15 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         elif path == "/chromosomeLength":
             try:
                 if len(argum) == 2:
-                    species_name = argum['species'][0]
+                    name_sp = argum['species'][0]
                     chrom = argum['chromosomes'][0]
-                    chr_dict = request_creation("info/assembly/" + species_name, "")
+                    chr_dict = request_creation("info/assembly/" + name_sp, "")
+                    chr_dict_2 = chr_dict["top_level_region"]
                     length = 0
-                    for c in range(0,len(chr_dict["top_level_region"])):
-                        length += int(chr_dict["top_level_region"][c]["length"])
-                    contents = read_html_file(path[1:] + ".html"). \
+                    for c in range(0, len(chr_dict_2)):
+                        if chr_dict_2[c]["name"] == chrom:
+                            length += int(chr_dict_2[c]["length"])
+                    contents = read_html_file(path[1:] + ".html").\
                         render(context={'length': length})
 
                 else:
@@ -126,9 +133,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             except Exception:
                 contents = read_html_file("Error.html") \
                     .render(context={})
-
-
-
 
 
 
@@ -150,13 +154,13 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
 
         return
 
-
-
+Hanler = TestHandler
 with socketserver.TCPServer(("", PORT), TestHandler) as httpd:
-    print("Serving at PORT...", PORT)
-    try:
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        print()
-        print("Stopped by the user")
-        httpd.server_close()
+        print("Serving at PORT...", PORT)
+        try:
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            print()
+            print("Stopped by the user")
+            httpd.server_close()
+

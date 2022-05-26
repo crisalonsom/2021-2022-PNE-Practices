@@ -1,18 +1,16 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>List of species</title>
+    <title>List of Species </title>
 </head>
-<body style="background-color: lightcoral">
-
-    <h1>LIST OF {{context.total}} ENSEMBL SPECIES 𓆉</h1>
-
-        {% for s in context.species %}
-        <p3> {{s}} </p3>
-        {% endfor %}
-
+<body style="background-color: lightcoral;">
+    <h1>LIST OF ENSEMBLE SPECIES </h1>
+    <p>The total number of species in ensemble is: <br>{{context.total}}</p>
+    <p>The limit number that has been selected :<br>{{context.limit}}</p>
+    <p>The species's names  are: <br>{{context.species}}</p>
     <a href="/">Return to the main page</a>
-
 </body>
 </html>
